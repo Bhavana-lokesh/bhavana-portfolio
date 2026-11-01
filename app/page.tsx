@@ -3,64 +3,97 @@
 
 import { useState, useEffect } from "react";
 
-const skills = [
-  "C", "C++", "Python", "HTML", "CSS", "JavaScript",
-  "PHP", "Node.js", "MySQL", "Firebase", "Git",
-  "GitHub", "AWS", "Software Testing",
-];
-
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  
-useEffect(() => {
-  const elements = document.querySelectorAll(".reveal");
+  const [activeSection, setActiveSection] = useState("top");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-      rootMargin: "0px 0px -40px 0px",
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal, .reveal-card");
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
     }
-  );
 
-  elements.forEach((element) => observer.observe(element));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -40px 0px",
+      }
+    );
 
-  return () => observer.disconnect();
-}, []);
+    elements.forEach((element) => observer.observe(element));
 
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (first, second) =>
+              first.boundingClientRect.top - second.boundingClientRect.top
+          );
+        const currentSection = visibleSections[0]?.target.id;
 
+        if (currentSection) {
+          setActiveSection(currentSection);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -70% 0px",
+      }
+    );
+
+    document
+      .querySelectorAll("section[id], footer[id]")
+      .forEach((section) => sectionObserver.observe(section));
+
+    return () => {
+      observer.disconnect();
+      sectionObserver.disconnect();
+    };
+  }, []);
 
   return (
     <main className="portfolio">
       
 {/* NAVIGATION */}
-<nav className="navbar">
-  <a href="#" className="logo">
+<nav className="navbar" aria-label="Primary navigation">
+  <a href="#top" className="logo" aria-label="Bhavana Lokesh, home">
     BL<span>.</span>
   </a>
 
   <button
     className="menu-toggle"
     onClick={() => setMenuOpen(!menuOpen)}
-    aria-label="Toggle navigation"
+    aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+    aria-expanded={menuOpen}
+    aria-controls="primary-navigation"
+    type="button"
   >
     ☰
   </button>
 
-  <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+  <div
+    className={`nav-links ${menuOpen ? "open" : ""}`}
+    id="primary-navigation"
+  >
     {["About", "Skills", "Projects", "Education", "Experience"].map(
       (item) => (
         <a
           key={item}
           href={`#${item.toLowerCase()}`}
           onClick={() => setMenuOpen(false)}
+          aria-current={
+            activeSection === item.toLowerCase() ? "location" : undefined
+          }
         >
           {item}
         </a>
@@ -70,6 +103,7 @@ useEffect(() => {
     <a
       href="#contact"
       onClick={() => setMenuOpen(false)}
+      aria-current={activeSection === "contact" ? "location" : undefined}
     >
       Contact
     </a>
@@ -79,21 +113,21 @@ useEffect(() => {
       href="#contact"
       onClick={() => setMenuOpen(false)}
     >
-      Let's Connect <span>↗</span>
+      Let&apos;s Connect <span>↗</span>
     </a>
   </div>
 </nav>
 
       
 {/* HERO */}
-<section className="hero">
+<section className="hero" id="top">
   <div className="hero-content">
     <div className="availability">
       <span className="status-dot" />
       OPEN TO JOB OPPORTUNITIES
     </div>
 
-    <p className="eyebrow">HELLO, I'M BHAVANA LOKESH</p>
+    <p className="eyebrow">HELLO, I&apos;M BHAVANA LOKESH</p>
 
     <h1>
       Building
@@ -123,7 +157,7 @@ useEffect(() => {
   </a>
 
   <a href="#contact" className="secondary-btn">
-    Let's Connect
+    Let&apos;s Connect
   </a>
 </div>
 
@@ -168,7 +202,7 @@ useEffect(() => {
   <div className="about-layout">
     <div className="about-main">
       <p className="intro-subtitle">
-        I'm Bhavana Lokesh, an MCA student and aspiring Software
+        I&apos;m Bhavana Lokesh, an MCA student and aspiring Software
         Developer based in Bengaluru, India. I enjoy transforming
         ideas into practical applications and exploring how
         technology can solve real-world problems.
@@ -177,7 +211,7 @@ useEffect(() => {
       <p className="intro-subtitle">
         From developing full-stack web applications to exploring
         cloud computing and artificial intelligence, I believe
-        in learning by building. I'm always eager to take on
+        in learning by building. I&apos;m always eager to take on
         challenges, strengthen my technical abilities and grow
         through meaningful development experiences.
       </p>
@@ -235,7 +269,7 @@ useEffect(() => {
 
   <div className="project-preview-grid">
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>01 / DEVELOPMENT</span>
       </div>
@@ -249,7 +283,7 @@ useEffect(() => {
       </div>
     </article>
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>02 / INTERFACE</span>
       </div>
@@ -263,7 +297,7 @@ useEffect(() => {
       </div>
     </article>
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>03 / SERVER & DATA</span>
       </div>
@@ -276,7 +310,7 @@ useEffect(() => {
       </div>
     </article>
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>04 / INFRASTRUCTURE</span>
       </div>
@@ -291,7 +325,7 @@ useEffect(() => {
       </div>
     </article>
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>05 / ADDITIONAL</span>
       </div>
@@ -324,7 +358,7 @@ useEffect(() => {
   <div className="project-preview-grid">
 
     {/* FEATURED PROJECT */}
-    <article className="featured-project">
+    <article className="featured-project reveal-card">
       <div className="project-topline">
         <span>01 / FLAGSHIP PROJECT</span>
         <span>FULL-STACK · AWS · AI</span>
@@ -335,32 +369,27 @@ useEffect(() => {
   <h3>EstateScope</h3>
   <span className="project-status">
     <span className="status-dot" />
-    WORKING PROJECT
+    FEATURED PROJECT
   </span>
 </div>
 
 
-      <p className="project-description">
-        An AWS-powered real estate platform that simplifies
-        property discovery, comparison, buying, selling and
-        rental management through intelligent features.
-      </p>
+<p className="project-description">
+  An AWS-based real estate property discovery and listing
+  platform for buying, selling and renting properties.
+</p>
 
-      <ul>
-        <li>AI-powered property finder using Gemini API</li>
-        <li>Advanced property search, filters and comparison</li>
-        <li>Property brochures and EMI calculator</li>
-        <li>Google Maps integration and visit scheduling</li>
-        <li>Buyer, agent and super admin dashboards</li>
-        <li>Property listing approval and management</li>
-        <li>AWS EC2, RDS and S3 integration</li>
+<ul>
+  <li>AI-powered property finder using Gemini API</li>
+  <li>Advanced property search, filters and comparison</li>
+  <li>Property brochures and EMI calculator</li>
+  <li>Google Maps integration and appointment scheduling</li>
+  <li>Buyer, agent and super admin dashboards</li>
+  <li>Property listing approval and management</li>
+  <li>AWS EC2, RDS and S3 integration</li>
       </ul>
 
       <div className="project-tags">
-        <span>PHP</span>
-        <span>MySQL</span>
-        <span>JavaScript</span>
-        <span>Bootstrap</span>
         <span>AWS EC2</span>
         <span>AWS RDS</span>
         <span>AWS S3</span>
@@ -371,14 +400,14 @@ useEffect(() => {
       <a
         href="https://github.com/Bhavana-lokesh/AWS-based-Realestate-project.git"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
       >
         Explore on GitHub ↗
       </a>
     </article>
 
     {/* MEDICARE */}
-    <article>
+    <article className="reveal-card">
     
       <div className="project-topline">
         <span>02 / TEAM PROJECT</span>
@@ -401,16 +430,10 @@ useEffect(() => {
         <li>Administrative management</li>
       </ul>
 
-      <div className="project-tags">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>Firebase</span>
-      </div>
     </article>
 
     {/* EMPLOYEE MANAGEMENT */}
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>03 / INDIVIDUAL PROJECT</span>
         <span>DESKTOP APPLICATION</span>
@@ -459,7 +482,7 @@ useEffect(() => {
   <div className="project-preview-grid">
 
     {/* MCA */}
-    <article className="featured-project">
+    <article className="featured-project reveal-card">
       <div className="project-topline">
         <span>POSTGRADUATE DEGREE</span>
         <span>2025 — 2027</span>
@@ -484,10 +507,10 @@ useEffect(() => {
     </article>
 
     {/* BCA */}
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>UNDERGRADUATE DEGREE</span>
-        <span>2022 — 2025</span>
+        <span>COMPLETED 2025</span>
       </div>
 
       <h3>Bachelor of Computer Applications</h3>
@@ -508,7 +531,7 @@ useEffect(() => {
     </article>
 
     {/* NPTEL */}
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>ONLINE CERTIFICATION</span>
         <span>NPTEL</span>
@@ -525,11 +548,6 @@ useEffect(() => {
         <span>CERTIFICATE</span>
       </div>
 
-      <div className="project-tags">
-        <span>Artificial Intelligence</span>
-        <span>Machine Learning</span>
-        <span>Business Applications</span>
-      </div>
     </article>
 
   </div>
@@ -545,7 +563,7 @@ useEffect(() => {
 
   <div className="project-preview-grid">
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>INTERNSHIP</span>
         <span>01</span>
@@ -557,21 +575,9 @@ useEffect(() => {
         Technofly Solutions
       </p>
 
-      <p className="project-description">
-        Developed foundational knowledge of cybersecurity,
-        network security, common threats, vulnerabilities
-        and data protection.
-      </p>
-
-      <div className="project-tags">
-        <span>Cybersecurity</span>
-        <span>Network Security</span>
-        <span>Threat Identification</span>
-        <span>Data Protection</span>
-      </div>
     </article>
 
-    <article>
+    <article className="reveal-card">
       <div className="project-topline">
         <span>CERTIFICATION</span>
         <span>02</span>
@@ -582,18 +588,6 @@ useEffect(() => {
       <p className="project-description">
         NPTEL · Silver Certificate
       </p>
-
-      <p className="project-description">
-        Studied AI concepts, machine learning fundamentals,
-        business applications of AI and data-driven
-        decision-making.
-      </p>
-
-      <div className="project-tags">
-        <span>Artificial Intelligence</span>
-        <span>Machine Learning</span>
-        <span>AI Applications in Management</span>
-      </div>
     </article>
 
   </div>
@@ -605,11 +599,11 @@ useEffect(() => {
   <p>HAVE AN OPPORTUNITY?</p>
 
   <h2>
-    Let's build something meaningful<span>.</span>
+    Let&apos;s build something meaningful<span>.</span>
   </h2>
 
   <p>
-    I'm actively looking for software development opportunities
+    I&apos;m actively looking for software development opportunities
     where I can learn, contribute and grow.
   </p>
 
@@ -635,11 +629,11 @@ useEffect(() => {
   </a>
 
   <div className="footer-links">
-    <a href="https://github.com/Bhavana-lokesh" target="_blank" rel="noreferrer">
+    <a href="https://github.com/Bhavana-lokesh" target="_blank" rel="noopener noreferrer">
       GitHub ↗
     </a>
 
-    <a href="https://www.linkedin.com/in/bhavana-lokesh-b5a847447/" target="_blank" rel="noreferrer">
+    <a href="https://www.linkedin.com/in/bhavana-lokesh-b5a847447/" target="_blank" rel="noopener noreferrer">
       LinkedIn ↗
     </a>
   </div>

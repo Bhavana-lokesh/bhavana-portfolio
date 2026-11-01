@@ -38,11 +38,21 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border: 1px solid rgba(0, 232, 154, 0.1);
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  background: rgba(5, 9, 7, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .logo {
-  font-size: 35px;
-  font-weight: 900;
+  font-size: 31px;
+  font-weight: 800;
+  letter-spacing: -2px;
 }
 
 .logo span,
@@ -82,27 +92,26 @@ footer h2 span {
 
 .hero {
   max-width: 1250px;
-  min-height: 640px;
   margin: auto;
-  padding: 65px 7% 100px;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  gap: 35px;
 }
 
 .availability {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 15px;
-  border: 1px solid #24573d;
-  border-radius: 30px;
+  padding: 10px 17px;
+  border: 1px solid rgba(0, 232, 154, 0.25);
+  border-radius: 50px;
+  background: rgba(0, 232, 154, 0.07);
+  color: #8affc8;
   font-size: 10px;
+  font-weight: 800;
   letter-spacing: 1.5px;
-  color: var(--green);
+  box-shadow: 0 5px 20px rgba(0, 232, 154, 0.06);
 }
-
 .status-dot {
   width: 8px;
   height: 8px;
@@ -111,8 +120,7 @@ footer h2 span {
   box-shadow: 0 0 12px var(--green);
 }
 
-.eyebrow,
-.section-label {
+.eyebrow {
   margin-top: 35px;
   color: var(--green);
   font-size: 12px;
@@ -120,24 +128,28 @@ footer h2 span {
 }
 
 .hero h1 {
-  margin: 20px 0;
-  font-size: clamp(65px, 9vw, 110px);
-  line-height: 0.95;
+  font-size: clamp(72px, 8.5vw, 115px);
+  font-weight: 900;
+  line-height: 0.96;
   letter-spacing: -7px;
+  margin: 28px 0;
+  color: #f5fff9;
+  text-shadow: 0 8px 35px rgba(0, 232, 154, 0.08);
 }
 
 .hero-description {
-  max-width: 510px;
-  color: var(--muted);
+  max-width: 540px;
+  color: #a9b9ae;
   font-size: 16px;
-  line-height: 1.9;
+  line-height: 1.95;
+  letter-spacing: 0.15px;
 }
 
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .primary-btn,
@@ -149,18 +161,40 @@ footer h2 span {
 }
 
 .primary-btn {
-  color: #06110a;
-  background: var(--green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 28px;
+  border: 1px solid #00e89a;
+  border-radius: 50px;
+  background: linear-gradient(110deg, #00e89a, #8affc8);
+  color: #06140e;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(0, 232, 154, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .secondary-btn {
-  border: 1px solid #35433a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 25px;
+  border: 1px solid rgba(138, 255, 200, 0.35);
+  border-radius: 50px;
+  background: rgba(0, 232, 154, 0.04);
+  color: #d8f5e6;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .hero-meta {
   display: flex;
   gap: 25px;
-  margin-top: 45px;
+  margin-top: 30px;
   color: var(--muted);
   font-size: 12px;
 }
@@ -254,13 +288,14 @@ footer h2 span {
 .projects-preview {
   max-width: 1110px;
   margin: auto;
-  padding: 80px 7%;
+  padding-right: 7%;
+  padding-left: 7%;
   border-top: 1px solid #1a2820;
 }
 
 .intro-strip > p:first-child {
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 2px;
 }
 
@@ -283,7 +318,7 @@ footer h2 span {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .skill-chip {
@@ -298,8 +333,8 @@ footer h2 span {
 .project-preview-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 35px;
+  gap: 24px;
+  margin-top: 30px;
   align-items: stretch;
 }
 
@@ -331,7 +366,6 @@ footer h2 span {
 }
 
 .project-preview-grid article {
-  min-height: 320px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -406,7 +440,6 @@ footer h2 span {
 
 .project-preview-grid article.featured-project {
   grid-column: 1 / -1;
-  min-height: 400px;
   background: radial-gradient(ellipse at top right, #17472c 0%, #101a13 45%, #0b110d 100%);
   border-color: #34784b;
 }
@@ -417,7 +450,6 @@ footer h2 span {
 }
 
 footer {
-  padding: 90px 7% 30px;
   text-align: center;
   background: #0c130e;
   border-top: 1px solid #24392b;
@@ -443,12 +475,12 @@ footer > a {
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin: 35px 0;
+  margin: 24px 0;
   color: var(--muted);
 }
 
 .copyright {
-  margin-top: 55px;
+  margin-top: 30px;
   color: #748077;
   font-size: 11px;
 }
@@ -600,11 +632,12 @@ footer > a {
   line-height: 1.9;
   color: #aab8b0;
   max-width: 650px;
+  margin: 0;
 }
 
 .project-preview-grid article ul {
   padding-left: 20px;
-  margin: 22px 0;
+  margin: 16px 0;
   color: #d5ded8;
   font-size: 13px;
   line-height: 2.1;
@@ -651,8 +684,7 @@ footer > a {
   display: grid;
   grid-template-columns: 1.4fr 0.8fr;
   gap: 55px;
-  align-items: center;
-  margin-top: 35px;
+  align-items: start;
 }
 
 .about-main .intro-subtitle {
@@ -884,6 +916,10 @@ footer > a {
 }
 
 .nav-links a:not(.nav-cta):hover::after {
+  width: 100%;
+}
+
+.nav-links a[aria-current="location"]::after {
   width: 100%;
 }
 
@@ -1192,7 +1228,7 @@ body {
     radial-gradient(ellipse at 85% 35%, rgba(0, 120, 75, 0.07), transparent 38%),
     #050907;
   color: var(--foreground);
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0.1px;
 }
 
@@ -1218,12 +1254,13 @@ body {
 .skills-preview,
 .projects-preview {
   position: relative;
-  padding-top: 105px;
-  padding-bottom: 105px;
+  padding-top: 75px;
+  padding-bottom: 75px;
   border-top: 1px solid rgba(255, 255, 255, 0.055);
 }
 
 .section-label {
+  margin-top: 0;
   color: var(--green);
   font-weight: 700;
   font-size: 11px;
@@ -1239,7 +1276,7 @@ body {
   font-weight: 750;
   line-height: 1.15;
   letter-spacing: -1.8px;
-  margin: 18px 0;
+  margin: 12px 0;
 }
 
 .intro-subtitle,
@@ -1247,6 +1284,11 @@ body {
   color: #a5b5aa;
   font-size: 15px;
   line-height: 2;
+}
+
+.skills-preview > p:last-of-type,
+.projects-preview > p:last-of-type {
+  margin: 0;
 }
 
 /* PREMIUM SKILL CHIPS */
@@ -1308,11 +1350,14 @@ footer {
 ========================================= */
 
 .hero {
-  position: relative;
-  min-height: 720px;
-  padding-top: 90px;
-  padding-bottom: 110px;
-  gap: 55px;
+  max-width: 1350px;
+  min-height: 620px;
+  margin: auto;
+  padding: 75px 7% 110px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 45px;
 }
 
 /* Atmospheric lighting behind hero */
@@ -1357,17 +1402,15 @@ footer {
 }
 
 .hero h1 span {
-  display: inline-block;
   background: linear-gradient(
     110deg,
-    #ffffff 5%,
-    #8affc8 42%,
-    #00e89a 85%
+    #00e89a 10%,
+    #8affc8 50%,
+    #00b879 90%
   );
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 8px 22px rgba(0, 232, 154, 0.12));
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-description {
@@ -1402,6 +1445,7 @@ footer {
 .hero-visual {
   perspective: 1100px;
   isolation: isolate;
+  transform: scale(1.04);
 }
 
 .orb-center {
@@ -1470,8 +1514,8 @@ footer {
 
 #about {
   position: relative;
-  padding-top: 115px;
-  padding-bottom: 115px;
+  padding-top: 75px;
+  padding-bottom: 75px;
 }
 
 #about h2 {
@@ -1479,7 +1523,7 @@ footer {
   font-size: clamp(38px, 5vw, 56px);
   font-weight: 800;
   letter-spacing: -2px;
-  margin: 15px 0 25px;
+  margin: 10px 0 16px;
 }
 
 #about h2 span {
@@ -1487,20 +1531,20 @@ footer {
 }
 
 .about-layout {
-  gap: 75px;
+  margin-top: 20px;
 }
 
 .about-main .intro-subtitle {
   color: #a9b9ae;
   font-size: 15px;
-  line-height: 2.1;
-  margin-bottom: 24px;
+  line-height: 2;
+  margin-bottom: 16px;
 }
 
 .about-profile {
   position: relative;
   overflow: hidden;
-  padding: 35px;
+  padding: 28px;
   border: 1px solid rgba(0, 232, 154, 0.25);
   border-radius: 24px;
   background:
@@ -1568,8 +1612,8 @@ footer {
 
 #skills {
   position: relative;
-  padding-top: 115px;
-  padding-bottom: 115px;
+  padding-top: 75px;
+  padding-bottom: 75px;
 }
 
 #skills h2 {
@@ -1577,7 +1621,7 @@ footer {
   font-weight: 800;
   letter-spacing: -2px;
   color: #f5fff9;
-  margin: 18px 0;
+  margin: 12px 0;
 }
 
 #skills h2 span {
@@ -1586,8 +1630,7 @@ footer {
 
 /* SKILL CATEGORY CARDS */
 #skills .project-preview-grid {
-  gap: 24px;
-  margin-top: 45px;
+  margin-top: 30px;
 }
 
 #skills .project-preview-grid article {
@@ -1683,8 +1726,8 @@ footer {
 ========================================= */
 
 #projects {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 #projects h2 {
@@ -1698,8 +1741,8 @@ footer {
 #projects .featured-project {
   position: relative;
   overflow: hidden;
-  padding: 48px;
-  min-height: 460px;
+  padding: 36px;
+  min-height: 380px;
   border: 1px solid rgba(0, 232, 154, 0.4);
   border-radius: 26px;
   background:
@@ -1750,7 +1793,7 @@ footer {
   font-weight: 850;
   letter-spacing: -3px;
   line-height: 1;
-  margin: 35px 0 22px;
+  margin: 20px 0 14px;
   background: linear-gradient(100deg, #ffffff 15%, #8affc8 55%, #00e89a 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -1771,7 +1814,7 @@ footer {
 #projects .featured-project ul {
   position: relative;
   z-index: 1;
-  margin: 25px 0;
+  margin: 16px 0;
   color: #dce9e0;
   font-size: 13px;
   line-height: 2.2;
@@ -1786,7 +1829,7 @@ footer {
   position: relative;
   z-index: 1;
   gap: 10px;
-  margin-top: 25px;
+  margin-top: 16px;
 }
 
 #projects .featured-project .project-tags span {
@@ -1803,7 +1846,7 @@ footer {
   position: relative;
   z-index: 1;
   display: inline-flex;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 14px 22px;
   border-radius: 30px;
   background: linear-gradient(110deg, #00e89a, #8affc8);
@@ -1825,8 +1868,8 @@ footer {
 #projects .project-preview-grid article:not(.featured-project) {
   position: relative;
   overflow: hidden;
-  min-height: 360px;
-  padding: 34px;
+  min-height: 280px;
+  padding: 26px;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 22px;
   background:
@@ -1871,7 +1914,7 @@ footer {
   line-height: 1.25;
   letter-spacing: -1px;
   color: #f2fff8;
-  margin: 15px 0;
+  margin: 12px 0;
 }
 
 /* DESCRIPTIONS */
@@ -1918,8 +1961,8 @@ footer {
 
 #education {
   position: relative;
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 #education h2 {
@@ -1935,15 +1978,14 @@ footer {
 }
 
 #education .project-preview-grid {
-  gap: 24px;
-  margin-top: 45px;
+  margin-top: 30px;
 }
 
 #education .project-preview-grid article {
   position: relative;
   overflow: hidden;
-  min-height: 350px;
-  padding: 32px;
+  min-height: 260px;
+  padding: 24px;
   border: 1px solid rgba(0, 232, 154, 0.17);
   border-radius: 22px;
   background:
@@ -1975,7 +2017,7 @@ footer {
   font-size: 25px;
   line-height: 1.35;
   letter-spacing: -0.7px;
-  margin: 24px 0 12px;
+  margin: 14px 0 8px;
 }
 
 #education .project-description {
@@ -1988,7 +2030,7 @@ footer {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin: 25px 0;
+  margin: 14px 0;
 }
 
 #education .education-score strong {
@@ -2029,8 +2071,8 @@ footer {
 ========================================= */
 
 #experience {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 
 #experience h2 {
@@ -2046,15 +2088,14 @@ footer {
 }
 
 #experience .project-preview-grid {
-  gap: 25px;
-  margin-top: 45px;
+  margin-top: 30px;
 }
 
 #experience .project-preview-grid article {
   position: relative;
   overflow: hidden;
-  min-height: 340px;
-  padding: 35px;
+  min-height: 230px;
+  padding: 24px;
   border: 1px solid rgba(0, 232, 154, 0.18);
   border-radius: 22px;
   background:
@@ -2085,21 +2126,21 @@ footer {
   font-size: 28px;
   line-height: 1.3;
   letter-spacing: -1px;
-  margin: 25px 0 14px;
+  margin: 14px 0 8px;
 }
 
 #experience .project-description {
   color: #aab9af;
   font-size: 13px;
   line-height: 1.9;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 #experience .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-  margin-top: 25px;
+  margin-top: 14px;
 }
 
 #experience .project-tags span {
@@ -2119,7 +2160,6 @@ footer {
 #contact {
   position: relative;
   overflow: hidden;
-  padding: 120px 30px;
   border-top: 1px solid rgba(0, 232, 154, 0.12);
   background:
     radial-gradient(ellipse at 50% 100%, rgba(0, 232, 154, 0.12), transparent 60%),
@@ -2290,12 +2330,46 @@ body::after {
   filter: none;
 }
 
+.reveal-card {
+  opacity: 0;
+  translate: 0 18px;
+  transition:
+    opacity 0.65s ease,
+    translate 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-card.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.project-preview-grid > .reveal-card:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.project-preview-grid > .reveal-card:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+.project-preview-grid > .reveal-card:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.project-preview-grid > .reveal-card:nth-child(5) {
+  transition-delay: 320ms;
+}
+
 .project-preview-grid article,
 .about-profile {
   will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .reveal-card {
+    opacity: 1;
+    translate: 0 0;
+  }
+
   *,
   *::before,
   *::after {
@@ -2316,13 +2390,13 @@ body::after {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 22px;
-  padding: 110px 25px;
+  gap: 16px;
+  padding: 75px 25px;
 }
 
 #contact h2 {
   max-width: 850px;
-  margin: 10px auto;
+  margin: 6px auto;
 }
 
 #contact > p {
@@ -2340,7 +2414,7 @@ body::after {
   justify-content: center !important;
   gap: 18px !important;
   width: 100%;
-  margin: 25px auto !important;
+  margin: 8px auto !important;
 }
 
 #contact .hero-buttons a {
@@ -2361,7 +2435,7 @@ body::after {
 
 #contact > a {
   display: inline-block;
-  margin: 8px 0;
+  margin: 4px 0;
 }
 
 #contact .footer-links {
@@ -2444,9 +2518,13 @@ body::after {
   background: #00e89a;
   box-shadow: 0 0 10px #00e89a;
 }
-
-
-
-
-
-
+.primary-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 232, 154, 0.35);
+}
+.secondary-btn:hover {
+  transform: translateY(-4px);
+  border-color: #00e89a;
+  background: rgba(0, 232, 154, 0.12);
+  box-shadow: 0 8px 25px rgba(0, 232, 154, 0.12);
+}
