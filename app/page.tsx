@@ -25,8 +25,8 @@ export default function Home() {
         });
       },
       {
-        threshold: 0.15,
-        rootMargin: "0px 0px -40px 0px",
+        threshold: 0,
+        rootMargin: "0px 0px -8% 0px",
       }
     );
 
@@ -43,7 +43,9 @@ export default function Home() {
         const currentSection = visibleSections[0]?.target.id;
 
         if (currentSection) {
-          setActiveSection(currentSection);
+          setActiveSection((active) =>
+            active === currentSection ? active : currentSection
+          );
         }
       },
       {

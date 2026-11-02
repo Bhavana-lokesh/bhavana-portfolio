@@ -11,7 +11,12 @@
 
 * {
   box-sizing: border-box;
-  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -1012,10 +1017,12 @@ html {
 
 @keyframes orbPulse {
   0%, 100% {
-    box-shadow: 0 0 25px rgba(0, 232, 154, 0.2);
+    opacity: 0.94;
+    transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 65px rgba(0, 232, 154, 0.55);
+    opacity: 1;
+    transform: scale(1.025);
   }
 }
 
@@ -1052,11 +1059,11 @@ html {
 /* ORBIT ROTATION */
 
 .orbit-one {
-  animation: rotateOrbit 18s linear infinite;
+  animation: rotateOrbit 48s linear infinite;
 }
 
 .orbit-two {
-  animation: rotateOrbit 25s linear infinite reverse;
+  animation: rotateOrbit 72s linear infinite reverse;
 }
 
 @keyframes rotateOrbit {
@@ -1133,13 +1140,11 @@ section {
 @keyframes section3DReveal {
   from {
     opacity: 0;
-    transform: perspective(1200px) translateY(45px) rotateX(7deg);
-    filter: blur(5px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
-    transform: perspective(1200px) translateY(0) rotateX(0);
-    filter: blur(0);
+    transform: translateY(0);
   }
 }
 
@@ -1169,20 +1174,15 @@ section:target h2 {
 
 .reveal {
   opacity: 0;
-  transform: perspective(1200px) translateY(70px) rotateX(9deg) scale(0.96);
-  filter: blur(7px);
-  transform-origin: center bottom;
+  transform: translateY(28px);
   transition:
-    opacity 0.9s ease,
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.9s ease;
-  will-change: opacity, transform, filter;
+    opacity 0.6s ease,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: perspective(1200px) translateY(0) rotateX(0) scale(1);
-  filter: blur(0);
+  transform: translateY(0);
 }
 
 /* PROJECT AND CONTENT CARD DEPTH */
@@ -1249,53 +1249,50 @@ body::before {
 }
 
 html::before {
-  inset: -12%;
+  inset: -3%;
   z-index: 0;
-  opacity: 0.86;
+  opacity: 0.72;
   background: radial-gradient(circle at 20px 26px, rgba(239, 255, 247, 0.95) 0 1px, transparent 1.7px);
-  background-size: 115px 140px;
+  background-size: 170px 220px;
   background-repeat: repeat;
-  animation: starDriftFar 76s linear infinite, starTwinkleFar 6.4s ease-in-out infinite alternate;
+  animation: starDriftFar 90s linear infinite, starTwinkleFar 7.5s ease-in-out infinite alternate;
 }
 
 html::after {
-  inset: -14%;
+  inset: -3%;
   z-index: 0;
-  opacity: 0.78;
+  opacity: 0.64;
   background:
     radial-gradient(circle at 63px 79px, rgba(184, 255, 220, 0.96) 0 1.25px, transparent 2px),
-    radial-gradient(ellipse at 18% 28%, rgba(0, 232, 154, 0.11), transparent 37%),
-    radial-gradient(ellipse at 78% 72%, rgba(0, 150, 128, 0.1), transparent 40%);
-  background-size: 190px 245px, 100% 100%, 100% 100%;
-  background-position: 0 0, 0 0, 0 0;
+    radial-gradient(ellipse at 18% 28%, rgba(0, 232, 154, 0.1), transparent 34%),
+    radial-gradient(ellipse at 78% 72%, rgba(0, 150, 128, 0.09), transparent 36%);
+  background-size: 275px 350px, 100% 100%, 100% 100%;
   background-repeat: repeat, no-repeat, no-repeat;
-  animation: starDriftMid 54s linear infinite, starTwinkleMid 4.8s ease-in-out infinite alternate,
-    nebulaDrift 38s ease-in-out infinite alternate;
+  animation: starDriftMid 72s linear infinite, starTwinkleMid 6s ease-in-out infinite alternate;
 }
 
 body::before {
-  inset: -16%;
-  z-index: -1;
-  opacity: 0.84;
+  inset: -3%;
+  z-index: 0;
+  opacity: 0.6;
   background:
     radial-gradient(circle at 74px 96px, rgba(110, 255, 204, 0.98) 0 1.7px, transparent 2.7px),
-    radial-gradient(circle at 12% 28%, rgba(0, 255, 180, 0.85) 0 1px, rgba(0, 255, 180, 0.3) 2px, transparent 11px),
-    radial-gradient(circle at 38% 76%, rgba(0, 210, 190, 0.8) 0 1.4px, rgba(0, 210, 190, 0.28) 2px, transparent 13px),
-    radial-gradient(circle at 67% 34%, rgba(91, 255, 198, 0.82) 0 1.2px, rgba(91, 255, 198, 0.24) 2px, transparent 12px),
-    radial-gradient(circle at 88% 82%, rgba(0, 232, 154, 0.86) 0 1.4px, rgba(0, 232, 154, 0.25) 2px, transparent 14px),
-    radial-gradient(ellipse at 28% 42%, rgba(0, 232, 154, 0.13), transparent 36%),
-    radial-gradient(ellipse at 76% 57%, rgba(0, 160, 170, 0.12), transparent 39%);
-  background-size: 285px 365px, 100% 100%, 100% 100%, 100% 100%,
+    radial-gradient(circle at 12% 28%, rgba(0, 255, 180, 0.75) 0 1px, transparent 7px),
+    radial-gradient(circle at 38% 76%, rgba(0, 210, 190, 0.7) 0 1.4px, transparent 8px),
+    radial-gradient(circle at 67% 34%, rgba(91, 255, 198, 0.72) 0 1.2px, transparent 7px),
+    radial-gradient(circle at 88% 82%, rgba(0, 232, 154, 0.76) 0 1.4px, transparent 8px),
+    radial-gradient(ellipse at 28% 42%, rgba(0, 232, 154, 0.1), transparent 32%),
+    radial-gradient(ellipse at 76% 57%, rgba(0, 160, 170, 0.09), transparent 35%);
+  background-size: 420px 540px, 100% 100%, 100% 100%, 100% 100%,
     100% 100%, 100% 100%, 100% 100%;
-  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-  animation: starDriftNear 36s linear infinite, starTwinkleNear 3.7s ease-in-out infinite alternate,
-    nebulaDrift 26s ease-in-out infinite alternate;
+  animation: starDriftNear 54s linear infinite, starTwinkleNear 5s ease-in-out infinite alternate;
 }
 
 .portfolio {
   position: relative;
   z-index: 1;
+  isolation: isolate;
 }
 
 /* SECTION CONSISTENCY */
@@ -1550,10 +1547,10 @@ footer {
 
 @keyframes statusPulse {
   0%, 100% {
-    box-shadow: 0 0 5px #00e89a;
+    opacity: 0.72;
   }
   50% {
-    box-shadow: 0 0 18px #00e89a;
+    opacity: 1;
   }
 }
 
@@ -2291,18 +2288,18 @@ footer {
 }
 
 @keyframes starDriftFar {
-  from { background-position: 0 0; }
-  to { background-position: 115px 140px; }
+  from { transform: translate3d(-0.25%, -0.3%, 0); }
+  to { transform: translate3d(0.25%, 0.3%, 0); }
 }
 
 @keyframes starDriftMid {
-  from { background-position: 0 0, 0 0, 0 0; }
-  to { background-position: 190px 245px, 0 0, 0 0; }
+  from { transform: translate3d(0.3%, -0.25%, 0); }
+  to { transform: translate3d(-0.3%, 0.25%, 0); }
 }
 
 @keyframes starDriftNear {
-  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
-  to { background-position: 285px 365px, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+  from { transform: translate3d(-0.35%, 0.25%, 0); }
+  to { transform: translate3d(0.35%, -0.25%, 0); }
 }
 
 @keyframes starTwinkleFar {
@@ -2320,11 +2317,6 @@ footer {
   to { opacity: 1; }
 }
 
-@keyframes nebulaDrift {
-  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
-  to { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
-}
-
 /* SUBTLE SECTION GLOW */
 .intro-strip::before,
 .skills-preview::before,
@@ -2336,8 +2328,8 @@ footer {
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  background: rgba(0, 232, 154, 0.045);
-  filter: blur(75px);
+  background: radial-gradient(circle, rgba(0, 232, 154, 0.07), transparent 70%);
+  filter: none;
   pointer-events: none;
 }
 
@@ -2352,7 +2344,8 @@ footer {
   html::before,
   html::after,
   body::before {
-    animation: none;
+    animation: none !important;
+    transform: none;
   }
 }
 
@@ -2434,14 +2427,22 @@ body::after {
   .reveal-card {
     opacity: 1;
     translate: 0 0;
+    transition: none;
+  }
+
+  .reveal,
+  .reveal-card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }
